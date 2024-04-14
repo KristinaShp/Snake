@@ -1,0 +1,41 @@
+<script>
+    'use strict'
+    let userNumber;
+
+    const MAX_NUMBER = 100;
+
+    const randomNumber = generateRandomNumber(MAX_NUMBER);
+        
+    function generateRandomNumber(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+    function askAndCheck() {
+        userNumber = +prompt(`Guess the number between 0 and ${MAX_NUMBER}`);
+        debugger
+        if (!userNumber) {
+            alert ('You entered not a number');
+            return;
+        }
+
+        if (userNumber === randomNumber) {
+            alert('You win!');
+        } else {
+            alert('You Lose!');
+            generateHelp(userNumber, randomNumber);
+        }
+    }
+
+    function generateHelp(a, b) {
+        const diff = Math.abs(a - b)
+        if (diff <= 10 && diff >= 5) {
+            alert('Warm');
+        } else if (diff < 5) {
+            alert('Hot')
+        } else {
+            alert('Cold');
+        }
+    }
+
+    while (userNumber !== randomNumber) { askAndCheck() };
+</script>

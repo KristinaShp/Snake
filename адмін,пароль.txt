@@ -1,0 +1,29 @@
+<script>
+'use strict'
+let login = promt("Кто там?");
+if(login === 'Админ'){
+let pasword = promt("Пароль?");
+if (pasword ==='Я Главный'){
+alert('Здравствуйте!');
+}
+}
+
+
+if( login === false ){
+alert('Отменено');
+} else {
+login = '' {
+alert('Я вас не знаю');
+} else {
+
+
+
+
+
+let login=promt("Login");
+if( login = 'Админ') {
+alert
+
+password=promt("Password");
+alert(`
+if(password==

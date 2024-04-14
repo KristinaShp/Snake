@@ -1,0 +1,72 @@
+<script>
+'use strict'
+
+// function pow () {
+// let x = prompt ('What is the value of x');
+// let n = prompt ('What is the value of n');
+// if ( n >= 1 && n % 1 === 0) {
+//     return (x**(n));  
+// }
+// }
+// alert(pow());
+
+// function pow (x,n) {
+//     console.log(`Calculating power of ${x} and ${n}`);
+//     if ( n < 1 || n % 1 !== 0) {
+//         return 'Error';
+//     }
+//     let p = x**n;
+//     return p;
+// }
+// let x = prompt ('What is the value of x');
+// let n = prompt ('What is the value of n');
+// let v = pow(x,n); 
+// alert (v);
+
+
+// function multiply (x,c) {
+//     console.log (`Calculating of ${x} and ${c}`);
+//     let k = x*c;
+//     return k;
+// }
+// let x = prompt ('What is the value of x');
+// let n = prompt ('What is the value of n');
+// let v = multiply (x,n); 
+// alert (v);
+
+function calc (num1, num2, operator) {
+    let result;
+    switch (operator) {
+        case '+': {
+            console.log (`Adding numbers ${num1} + ${num2}`);
+            result = +num1 + +num2;
+            break;
+        }
+        case '-': {
+           console.log (`Subtracting numbers ${num1} - ${num2}`);
+            result = num1 - num2;
+            break;
+        }
+        case '*': {
+            console.log (`Multiplying numbers ${num1} * ${num2}` );
+            result = num1 * num2;
+            break;
+        }
+        default:
+            result = 'Unknown operator';
+            break;
+        case '/': {
+            console.log (`Dividing numbers ${num1} / ${num2}` );
+            result = num1 / num2;
+            break;
+        }
+
+    }
+    return result;
+}
+const nUm1 = prompt ('What is the value?');
+const nUm2 = prompt ('What is the value?');
+const operation = prompt('What is the operation?');
+const result = calc (nUm1, nUm2, operation);
+alert (result);
+</script>
