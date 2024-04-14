@@ -1,7 +1,7 @@
 <canvas id="pb" width="500" height="500"></canvas>
-<h1> Score: <span id = 'score'> </span> </h1>
+<h1> Score: <span id='score'> </span> </h1>
 <script>
-// sating up variables for rendering 
+    // sating up variables for rendering 
     const scoreView = document.getElementById("score");
     const pinkCanv = document.getElementById("pb");
     const pinkCtx = pinkCanv.getContext("2d");
@@ -12,7 +12,7 @@
     let gameOnPause = false
     let score = 0
 
-// sating up the size of game tile
+    // sating up the size of game tile
     const tileSize = 25;
     // game borders
     const endX = (pinkCanv.width / tileSize - 1);
@@ -24,10 +24,9 @@
     let snakeY = generateRandomNumber(pinkCanv.height / tileSize);
 
 
-// controlling the direction of snake movement 
+    // controlling the direction of snake movement 
     let velosityX = 0;
     let velosityY = 0;
-
 
 
     function generateRandomNumber(max) {
@@ -42,10 +41,10 @@
             appleX = generateRandomNumber(pinkCanv.width / tileSize);
             appleY = generateRandomNumber(pinkCanv.height / tileSize);
             score++;
-            scoreView.innerText = score;     
+            scoreView.innerText = score;
         }
 
-        
+
         // control snake always inside game field 
         if (snakeX < 0) {
             snakeX = endX;
@@ -78,11 +77,10 @@
         // change head coordinates 
         snakeX = snakeX + velosityX;
         snakeY = snakeY + velosityY;
-        
-    }
-    
 
-// control player input  
+    }
+
+    // control player input  
     function keyPush(evt) {
         switch (evt.keyCode) {
             case 37:
@@ -102,13 +100,11 @@
                 gameOnPause = true;
                 break;
             case 13:
-                if(gameOnPause){
+                if (gameOnPause) {
                     gameRun = setInterval(game, 500);
                     gameOnPause = false;
                 }
                 break;
-                
-            
         }
     }
 </script>
