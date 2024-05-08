@@ -30,10 +30,10 @@
 
 
     // controlling the direction of snake movement 
-    let velosityX = 0;
-    let velosityY = 0;
-
-
+    let velosity = {
+        x: 0,
+        y: 0,
+    };
     function generateRandomNumber(max) {
         return Math.floor(Math.random() * max);
     }
@@ -80,8 +80,8 @@
         snakeTail.push([snakeX, snakeY]);
         snakeTail.shift()
         // change head coordinates 
-        snakeX = snakeX + velosityX;
-        snakeY = snakeY + velosityY;
+        snakeX = snakeX + velosity.x;
+        snakeY = snakeY + velosity.y;
 
     }
 
@@ -89,16 +89,16 @@
     function keyPush(evt) {
         switch (evt.keyCode) {
             case 37:
-                velosityX = -1; velosityY = 0;
+                velosity.x = -1; velosity.y = 0;
                 break;
             case 38:
-                velosityX = 0; velosityY = -1;
+                velosity.x = 0; velosity.y = -1;
                 break;
             case 39:
-                velosityX = 1; velosityY = 0;
+                velosity.x = 1; velosity.y = 0;
                 break;
             case 40:
-                velosityX = 0; velosityY = 1;
+                velosity.x = 0; velosity.y = 1;
                 break;
             case 27:
                 clearInterval(gameRun);
