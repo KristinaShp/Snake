@@ -41,7 +41,8 @@
     function game() {
         // control apple eating 
         if (snake.x === apple.x && snake.y === apple.y) {
-            snakeTail.unshift([apple.x, apple.y]);
+            snakeTail.unshift({...apple}); // next is the same operation
+            // snakeTail.unshift({x: apple.x, y: apple.y});
 
             apple.x = generateRandomNumber(pinkCanv.width / tileSize);
             apple.y = generateRandomNumber(pinkCanv.height / tileSize);
@@ -73,12 +74,13 @@
         // cycle to draw every segment of snake tail
         for (let i = 0; i < snakeTail.length; i++) {
             pinkCtx.fillStyle = "green";
-            pinkCtx.fillRect(snakeTail[i][0] * tileSize, snakeTail[i][1] * tileSize, tileSize, tileSize);
+            pinkCtx.fillRect(snakeTail[i].x * tileSize, snakeTail[i].y * tileSize, tileSize, tileSize);
 
         }
         // changing tail coordinates
-        snakeTail.push([snake.x, snake.y]);
+        snakeTail.push({...snake});
         snakeTail.shift()
+        console.log(snakeTail)
         // change head coordinates 
         snake.x = snake.x + velosity.x;
         snake.y = snake.y + velosity.y;
