@@ -25,10 +25,10 @@
         x: generateRandomNumber(pinkCanv.width / tileSize),
         y: generateRandomNumber(pinkCanv.height / tileSize),
     }
-    let snakeX = generateRandomNumber(pinkCanv.width / tileSize);
-    let snakeY = generateRandomNumber(pinkCanv.height / tileSize);
-
-
+    let snake= {
+        x: generateRandomNumber(pinkCanv.width / tileSize),
+        y: generateRandomNumber(pinkCanv.height / tileSize),
+    };
     // controlling the direction of snake movement 
     let velosity = {
         x: 0,
@@ -40,7 +40,7 @@
 
     function game() {
         // control apple eating 
-        if (snakeX === apple.x && snakeY === apple.y) {
+        if (snake.x === apple.x && snake.y === apple.y) {
             snakeTail.unshift([apple.x, apple.y]);
 
             apple.x = generateRandomNumber(pinkCanv.width / tileSize);
@@ -51,17 +51,17 @@
 
 
         // control snake always inside game field 
-        if (snakeX < 0) {
-            snakeX = gameBorders.x;
+        if (snake.x < 0) {
+            snake.x = gameBorders.x;
         }
-        if (snakeX > gameBorders.x) {
-            snakeX = 0;
+        if (snake.x > gameBorders.x) {
+            snake.x = 0;
         }
-        if (snakeY < 0) {
-            snakeY = gameBorders.y;
+        if (snake.y < 0) {
+            snake.y = gameBorders.y;
         }
-        if (snakeY > gameBorders.y) {
-            snakeY = 0;
+        if (snake.y > gameBorders.y) {
+            snake.y = 0;
         }
         // rendering image
         pinkCtx.fillStyle = "pink";
@@ -69,7 +69,7 @@
         pinkCtx.fillStyle = "red";
         pinkCtx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
         pinkCtx.fillStyle = "darkgreen";
-        pinkCtx.fillRect(snakeX * tileSize, snakeY * tileSize, tileSize, tileSize);
+        pinkCtx.fillRect(snake.x * tileSize, snake.y * tileSize, tileSize, tileSize);
         // cycle to draw every segment of snake tail
         for (let i = 0; i < snakeTail.length; i++) {
             pinkCtx.fillStyle = "green";
@@ -77,11 +77,11 @@
 
         }
         // changing tail coordinates
-        snakeTail.push([snakeX, snakeY]);
+        snakeTail.push([snake.x, snake.y]);
         snakeTail.shift()
         // change head coordinates 
-        snakeX = snakeX + velosity.x;
-        snakeY = snakeY + velosity.y;
+        snake.x = snake.x + velosity.x;
+        snake.y = snake.y + velosity.y;
 
     }
 
