@@ -67,9 +67,9 @@
         pinkCtx.fillStyle = "darkgreen";
         pinkCtx.fillRect(snakeX * tileSize, snakeY * tileSize, tileSize, tileSize);
         // cycle to draw every segment of snake tail
-        for (let i = 0; i < snakeTail.length; i++) {
+        for (const tailSegment of snakeTail) {
             pinkCtx.fillStyle = "green";
-            pinkCtx.fillRect(snakeTail[i][0] * tileSize, snakeTail[i][1] * tileSize, tileSize, tileSize);
+            pinkCtx.fillRect(tailSegment[0] * tileSize, tailSegment[1] * tileSize, tileSize, tileSize);
 
         }
         // changing tail coordinates
