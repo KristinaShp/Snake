@@ -16,68 +16,73 @@
     // sating up the size of game tile
     const tileSize = 25;
     // game borders
-    const endX = (pinkCanv.width / tileSize - 1);
-    const endY = (pinkCanv.height / tileSize - 1);
+    const gameBorders = {
+        x:pinkCanv.width / tileSize - 1,
+        y:pinkCanv.height / tileSize - 1,
+    };
     const snakeTail = []
-    let appleX = generateRandomNumber(pinkCanv.width / tileSize);
-    let appleY = generateRandomNumber(pinkCanv.height / tileSize);
-    let snakeX = generateRandomNumber(pinkCanv.width / tileSize);
-    let snakeY = generateRandomNumber(pinkCanv.height / tileSize);
-
-
+    let apple = {
+        x: generateRandomNumber(pinkCanv.width / tileSize),
+        y: generateRandomNumber(pinkCanv.height / tileSize),
+    }
+    let snake= {
+        x: generateRandomNumber(pinkCanv.width / tileSize),
+        y: generateRandomNumber(pinkCanv.height / tileSize),
+    };
     // controlling the direction of snake movement 
-    let velosityX = 0;
-    let velosityY = 0;
-
-
+    let velosity = {
+        x: 0,
+        y: 0,
+    };
     function generateRandomNumber(max) {
         return Math.floor(Math.random() * max);
     }
 
     function game() {
         // control apple eating 
-        if (snakeX === appleX && snakeY === appleY) {
-            snakeTail.unshift([appleX, appleY]);
+        if (snake.x === apple.x && snake.y === apple.y) {
+            snakeTail.unshift({...apple}); // next is the same operation
+            // snakeTail.unshift({x: apple.x, y: apple.y});
 
-            appleX = generateRandomNumber(pinkCanv.width / tileSize);
-            appleY = generateRandomNumber(pinkCanv.height / tileSize);
+            apple.x = generateRandomNumber(pinkCanv.width / tileSize);
+            apple.y = generateRandomNumber(pinkCanv.height / tileSize);
             score++;
             scoreView.innerText = score;
         }
 
 
         // control snake always inside game field 
-        if (snakeX < 0) {
-            snakeX = endX;
+        if (snake.x < 0) {
+            snake.x = gameBorders.x;
         }
-        if (snakeX > endX) {
-            snakeX = 0;
+        if (snake.x > gameBorders.x) {
+            snake.x = 0;
         }
-        if (snakeY < 0) {
-            snakeY = endY;
+        if (snake.y < 0) {
+            snake.y = gameBorders.y;
         }
-        if (snakeY > endY) {
-            snakeY = 0;
+        if (snake.y > gameBorders.y) {
+            snake.y = 0;
         }
         // rendering image
         pinkCtx.fillStyle = "pink";
         pinkCtx.fillRect(0, 0, pinkCanv.width, pinkCanv.height);
         pinkCtx.fillStyle = "red";
-        pinkCtx.fillRect(appleX * tileSize, appleY * tileSize, tileSize, tileSize);
+        pinkCtx.fillRect(apple.x * tileSize, apple.y * tileSize, tileSize, tileSize);
         pinkCtx.fillStyle = "darkgreen";
-        pinkCtx.fillRect(snakeX * tileSize, snakeY * tileSize, tileSize, tileSize);
+        pinkCtx.fillRect(snake.x * tileSize, snake.y * tileSize, tileSize, tileSize);
         // cycle to draw every segment of snake tail
         for (const tailSegment of snakeTail) {
             pinkCtx.fillStyle = "green";
-            pinkCtx.fillRect(tailSegment[0] * tileSize, tailSegment[1] * tileSize, tileSize, tileSize);
-
+            pinkCtx.fillRect(tailSegment.x * tileSize, tailSegmenth.y * tileSize, tileSize, tileSize);
         }
         // changing tail coordinates
-        snakeTail.push([snakeX, snakeY]);
+        snakeTail.push({...snake});
         snakeTail.shift()
+        console.log(snakeTail)
         // change head coordinates 
-        snakeX = snakeX + velosityX;
-        snakeY = snakeY + velosityY;
+        snake.x = snake.x + velosity.x;
+        snake.y = snake.y + velosity.y;
 
     }
 
@@ -86,16 +91,16 @@
         evt.preventDefault()
         switch (evt.keyCode) {
             case 37:
-                velosityX = -1; velosityY = 0;
+                velosity.x = -1; velosity.y = 0;
                 break;
             case 38:
-                velosityX = 0; velosityY = -1;
+                velosity.x = 0; velosity.y = -1;
                 break;
             case 39:
-                velosityX = 1; velosityY = 0;
+                velosity.x = 1; velosity.y = 0;
                 break;
             case 40:
-                velosityX = 0; velosityY = 1;
+                velosity.x = 0; velosity.y = 1;
                 break;
             case 27:
                 clearInterval(gameRun);
