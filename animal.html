@@ -1,0 +1,33 @@
+<img id = "picture">
+<div id ="info"></div>
+<script>
+    const newPictureAnimal = document.getElementById("picture");
+        const newInfoZoo = document.getElementById("info");
+    class Animal {
+        type;
+        constructor(tp) {
+            this.type = tp;
+        }
+        async getInfo() {
+            const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(this.type)}`);
+            const result = await response.json();
+            newInfoZoo.innerText = result.extract;
+        }
+        async getPicture() {
+            const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=*&titles=${encodeURIComponent(this.type)}&prop=pageimages&format=json&pithumbsize=300`);
+            const result = await response.json();
+            const pageId = Object.keys(result.query.pages)[0]; 
+            newPictureAnimal.src = result.query.pages[pageId].thumbnail.source;
+            newPictureAnimal.alt = this.type
+
+        }
+    }
+    let animalType = prompt("Type of the animal");
+    const userAnimal = new Animal(animalType);
+    userAnimal.getInfo();
+    userAnimal.getPicture();
+</script>
+
+
+
+
